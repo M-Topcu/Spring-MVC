@@ -12,6 +12,8 @@ public class MyApplication {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfiguration.class);
 		MessageService messageService = context.getBean(MessageService.class);
 		messageService.sendMessage();
+		
+		context.close();
 	}
 
 }

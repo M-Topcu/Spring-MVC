@@ -1,5 +1,6 @@
 package com.tpe.main;
 
+import com.tpe.domain.Message;
 import com.tpe.service.MailService;
 import com.tpe.service.MessageService;
 import com.tpe.service.SMSService;
@@ -23,6 +24,9 @@ public class MyApplication {
 	
 //		If else vermek de cok makul degil 
 		
+		Message message = new Message();
+		message.setMessage("Your order sent");
+		
 		String serviceName = "mailService";
 		if(args.length>0) {
 			serviceName=args[0];
@@ -32,13 +36,13 @@ public class MyApplication {
 		
 		if (serviceName.equalsIgnoreCase("WhatsAppService")) {
 			messageService=new WhatsAppService();
-			messageService.sendMessage();
+			messageService.sendMessage(message);
 		} else if (serviceName.equalsIgnoreCase("SMSService")) {
 			messageService=new SMSService();
-			messageService.sendMessage();
+			messageService.sendMessage(message);
 		}else {
 			messageService = new MailService();
-			messageService.sendMessage();
+			messageService.sendMessage(message);
 		}
 		
 
