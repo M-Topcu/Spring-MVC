@@ -1,6 +1,9 @@
 package com.tpe.main;
 
 import com.tpe.domain.Message;
+import com.tpe.repository.DBRepository;
+import com.tpe.repository.FileRepository;
+import com.tpe.repository.Repository;
 import com.tpe.service.MailService;
 import com.tpe.service.MessageService;
 import com.tpe.service.SMSService;
@@ -28,20 +31,26 @@ public class MyApplication {
 		message.setMessage("Your order sent");
 		
 		String serviceName = "mailService";
+		String repositoryName = "dbRepository";
+		
 		if(args.length>0) {
 			serviceName=args[0];
+			repositoryName = args[1];
 		}
 		
 		MessageService messageService = null;
+		Repository repository = null;
+		
+		repository = repositoryName.equalsIgnoreCase("fileRepository")? new FileRepository() : new DBRepository();
 		
 		if (serviceName.equalsIgnoreCase("WhatsAppService")) {
-			messageService=new WhatsAppService();
+			messageService=new WhatsAppService(repository);
 			messageService.sendMessage(message);
 		} else if (serviceName.equalsIgnoreCase("SMSService")) {
-			messageService=new SMSService();
+			messageService=new SMSService(repository);
 			messageService.sendMessage(message);
 		}else {
-			messageService = new MailService();
+			messageService = new MailService(repository);
 			messageService.sendMessage(message);
 		}
 		
