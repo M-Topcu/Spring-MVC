@@ -1,8 +1,12 @@
 package com.tpe.service;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.tpe.domain.Message;
@@ -10,6 +14,7 @@ import com.tpe.repository.Repository;
 import com.tpe.thirdParty.ThirdPartyRepository;
 
 @Component
+//@Scope("prototype") // defaultu singelton
 @Qualifier("mailService")// 
 public class MailService implements MessageService{
 	
@@ -53,6 +58,16 @@ public class MailService implements MessageService{
 		repository.saveMessage(message);
 	}
 	
-
+	//obje olusmadan hemen once calistirir
+	@PostConstruct
+	public void init() {
+		System.out.println("Initializing");
+	}
+	
+	//obje yok olmadan once calisir, prototype`da obje yok olmaz bu yuzden calismaz
+	@PreDestroy
+	public void destroy() {
+		System.out.println("Destroying");
+	}
 
 }
