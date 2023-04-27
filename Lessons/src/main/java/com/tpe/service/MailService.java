@@ -15,7 +15,8 @@ import com.tpe.thirdParty.ThirdPartyRepository;
 
 @Component
 //@Scope("prototype") // defaultu singelton
-@Qualifier("mailService")// 
+@Qualifier("mailService")// bunun yerine @Component`i kullanarak da isim verebiliriz bean`e
+//injection yaparken component ismi de kullanilabilir Qualifier da. Ancak getBean yaparken Comp. kullanilmali
 public class MailService implements MessageService{
 	
 	private Repository repository;
