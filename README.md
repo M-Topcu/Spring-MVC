@@ -1,2 +1,3 @@
 # Spring-MVC
-This repository contains my Spring basic, Spring MVc and practice notes
+
+This repository contains my Spring basic, Spring MVc, servlet and practice notes
