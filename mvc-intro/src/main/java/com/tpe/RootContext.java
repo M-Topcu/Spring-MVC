@@ -14,7 +14,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 @Configuration
 @PropertySource("classpath:db.properties")
-public class AppContext {
+public class RootContext {
 
 	@Autowired
 	private Environment enviroment;
